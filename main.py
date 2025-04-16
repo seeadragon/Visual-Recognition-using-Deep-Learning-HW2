@@ -21,5 +21,6 @@ if __name__ == '__main__':
     model = FasterRCNN(config)
     #model.load_model("log\\faster_rcnn_resnet50_fpn_v6\\best_model.pth")
     model.train()
+    #model.eval()
     #model.visual()
     #model.test()

@@ -145,6 +145,18 @@ class FasterRCNN(nn.Module):
         self.writer.close()
 
 
+    def eval(self):
+        self.model.to(self.device)
+
+        data_loader = GetLoader(data_dir='data')
+        data_loader.batch_size = self.batch_size
+        valid_loader, valid_dataset = data_loader.valid_loader()
+
+        val_loss, map_score = self._eval_epoch(valid_loader, valid_dataset)
+
+        return val_loss, map_score
+
+
     def _train_epoch(self, train_loader, optimizer):
         """
         train the model on the training set 1 epoch
